@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Sayfam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Menü Stili */
+        .navbar {
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        .navbar li {
+            width: 100%;
+        }
+
+        .navbar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+            transform: translateX(4px);
+        }
+
+        .menu-icon {
+            display: block;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 1003;
+        }
+
+        .menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: transform 0.3s ease;
+        }
+
+        /* Menü Açıldığında Hamburger Çizgilerini Değiştirme */
+        .menu-icon.open div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-icon.open div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-icon.open div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                transform: translateX(100%);
+            }
+
+            .navbar ul {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hamburger Menü Simgesi -->
+    <div class="menu-icon" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menü -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="about.html">Hakkında</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('projects')">Projeler</a></li>
+            <li><a href="javascript:void(0)" onclick="showSection('contact')">İletişim</a></li>
+        </ul>
+    </nav>
+
+    <!-- Arka Plan Overlay -->
+    <div class="overlay" onclick="toggleMenu()"></div>
+
+    <!-- İçerik -->
+    <section id="home">
+        <h1>Hoş Geldiniz!</h1>
+    </section>
+
+    <style>
+        /* Hoş Geldiniz Başlığını Sayfanın Üst Ortasına Yerleştirme */
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            /* Üst kısmı hedef alıyoruz */
+            align-items: center;
+            /* Yatayda ortalama */
+            height: 100vh;
+            /* Sayfa yüksekliği */
+            padding-top: 100px;
+            /* Üstten biraz boşluk bırakıyoruz */
+            text-align: center;
+        }
+
+        #home h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            /* Şık bir gölge efekti */
+        }
+
+        #home p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+    </style>
+
+
+
+    <script>
+        // Menü açma ve kapama fonksiyonu
+        function toggleMenu() {
+            const navbar = document.querySelector('.navbar');
+            const menuIcon = document.querySelector('.menu-icon');
+            const overlay = document.querySelector('.overlay');
+
+            if (navbar.style.transform === 'translateX(0%)') {
+                navbar.style.transform = 'translateX(100%)';
+                overlay.classList.remove('show');
+            } else {
+                navbar.style.transform = 'translateX(0%)';
+                overlay.classList.add('show');
+            }
+
+            menuIcon.classList.toggle('open');
+        }
+
+        // Sekmelerin gösterilmesi
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.style.display = 'none');
+            const activeSection = document.getElementById(sectionId);
+            activeSection.style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>
